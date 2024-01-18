@@ -1,3 +1,5 @@
+#Scenario 1: Grocery Shopping List
+
 grocery_items = input("Enter your items, please use ',' after each item: ").split(',')
 
 yes_no_add = input("Do you want to delete some items? Enter 'yes' otherwise 'no' and add some thing Enter 'add': ")
@@ -24,3 +26,43 @@ else:
     print("Invalid input. Bye bye.")
 
 print(grocery_items)
+
+
+#Scenario 2: Student Grades 
+
+student_grades = {}
+
+student_frequency = int(input("Enter student frequency: "))
+
+for student in range(student_frequency):
+    name = input("Enter your name: ")
+    grade = input("Enter you grade in Capital")
+    student_grades.update({name:grade})
+    
+average_grade = "B"  
+average_student = ""
+
+for name, grade in student_grades.items():
+    if grade == average_grade:
+           average_grade = grade
+           average_student = name
+           print(f"{average_student} has the AVERAGE grade: {average_grade}")
+
+
+
+
+#Scenario 3: Word Frequency Counter
+
+word_list = ["apple", "banana", "apple", "orange", "banana", "grape", "apple"]
+
+A = word_list.count("apple")
+print(f"Apple: {A}")
+
+B = word_list.count("banana")
+print(f"Banana: {B}")
+
+O = word_list.count("orange")
+print(f"Orange: {O}")
+
+G = word_list.count("grape")
+print(f"Grape: {G}")
