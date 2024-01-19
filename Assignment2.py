@@ -66,3 +66,21 @@ print(f"Orange: {O}")
 
 G = word_list.count("grape")
 print(f"Grape: {G}")
+
+
+#Scenario 3: Password Strength Checker
+
+password_input = input("Enter your password: ")
+letter = any(alphabet.isalpha() for alphabet in password_input)
+number = any(digit.isdigit() for digit in password_input)
+
+if len(password_input) >= 8 and letter and number:
+    print(password_input)
+else:
+    print("Invalid password. Please ensure the following:")
+    if len(password_input) < 8:
+        print("• Password should be at least 8 characters long.")
+    if not number:
+        print("• Password should contain at least one digit.")
+    if not letter:
+        print("• Password should contain at least one letter.")
