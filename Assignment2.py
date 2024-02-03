@@ -2,51 +2,72 @@
 
 grocery_items = input("Enter your items, please use ',' after each item: ").split(',')
 
-yes_no_add = input("Do you want to delete some items? Enter 'yes' otherwise 'no' and add some thing Enter 'add': ")
+remove = input("Do you want to remove some items? Enter 'yes' otherwise 'no': ")
 
-if yes_no_add == "no":
+if remove == "no":
     print(f"This is your grocery items list: {grocery_items}")
   
 
-elif yes_no_add == "yes":
-    delete_items = input("Enter the items you want to remove, please use ',' after each item: ").split(',')
+elif remove == "yes":
+    remove_items = input("Enter the items you want to remove, please use ',' after each item: ").split(',')
 
-    for item in delete_items:
+    for item in remove_items:
         if item in grocery_items:
             grocery_items.remove(item)
-            print(f"This is your updated items list: {grocery_items}")
+            print(f"This is your remove items list: {grocery_items}")
         else:
             print(f"{item} not found in the items list.")
-elif  yes_no_add == "add":
-      add_items = input("Enter items please use ',' after each item: ").split(',')
-      grocery_items.append(add_items) 
-      print(f"This is your mote items list {grocery_items}")  
-     
-else:
-    print("Invalid input. Bye bye.")
 
-print(grocery_items)
+else:
+    print("Invalid input. Bye bye.")            
+
+add = input("if do you eant to add items? Enter 'add' otherwise 'no': ") 
+
+if add == 'add':
+    add_items = input("Enter your items: ")
+    grocery_items.append(add_items)
+    print(f"This is your add items list{grocery_items}")
+
+elif add == 'no':
+    print(grocery_items)
+
+else:
+    print("Invalid input. Bye bye.")     
+
+
+
+print(f"This is your final grocery list{grocery_items}")
+
 
 
 #Scenario 2: Student Grades 
 
 student_grades = {}
+total_students = int(input("Enter student frequency: "))
+total_percentage = 0
 
-student_frequency = int(input("Enter student frequency: "))
+for student in range(total_students):
+    name_of_student = input("Enter your name here: ")
 
-for student in range(student_frequency):
-    name = input("Enter your name: ")
-    grade = input("Enter you grade in Capital")
-    student_grades.update({name:grade})
+    subjects = ['maths', 'economics', 'accounting', 'P_O_C', 'statistics']
     
-average_grade = "B"  
-average_student = ""
+    student_grades[name_of_student] = {}
+    total_numbers = 0 
 
-for name, grade in student_grades.items():
-    if grade == average_grade:
-           average_grade = grade
-           average_student = name
-           print(f"{average_student} has the AVERAGE grade: {average_grade}")
+    for subject in subjects:
+        numbers = float(input(f"Enter your {subject} numbers: "))
+        student_grades[name_of_student][subject] = numbers
+        total_numbers += numbers
+    
+    percentage = total_numbers / len(subjects)
+    student_grades[name_of_student]['percentage'] = percentage
+    total_percentage += percentage
+
+average_percentage = total_percentage / total_students
+
+print(f"Student Grades: {student_grades}")
+print(f"Average Percentage is: {average_percentage}")
+
 
 
 
@@ -55,17 +76,17 @@ for name, grade in student_grades.items():
 
 word_list = ["apple", "banana", "apple", "orange", "banana", "grape", "apple"]
 
-A = word_list.count("apple")
-print(f"Apple: {A}")
+word_frequency = {}
 
-B = word_list.count("banana")
-print(f"Banana: {B}")
+for word in word_list:
+    if word in word_frequency:
+        word_frequency[word] += 1
+    else:
+        word_frequency[word] = 1
 
-O = word_list.count("orange")
-print(f"Orange: {O}")
-
-G = word_list.count("grape")
-print(f"Grape: {G}")
+print("Word Frequencies:")
+for word, frequency in word_frequency.items():
+    print(f"{word}: {frequency} times")
 
 
 #Scenario 3: Password Strength Checker
@@ -84,3 +105,113 @@ else:
         print("• Password should contain at least one digit.")
     if not letter:
         print("• Password should contain at least one letter.")
+
+
+
+
+#Scenario 04: Voting System (Annual Employee Recognition Awards)
+
+                            #LOGIC (1)
+
+Employees_of_the_Year = {}
+Team_player_of_the_Year = {}
+Innovation_award = {}
+
+num_of_nominees = int(input("Enter how many nominees participate in Annual Employee Recognition Awards:"))
+
+for nominee in range(num_of_nominees):
+    categories = input('''
+           If you participate in 'Employee of the Year', press 'A': 
+           If you participate in 'Team Player of the Year', press 'B': 
+           If you participate in 'Innovation Award', press 'C': 
+           ''')
+    
+    if categories == 'A':
+        names_of_A = input("Enter your name here: ")
+        categories_A = "Employees of the Year"
+        Employees_of_the_Year[names_of_A] = {'category': categories_A, 'votes': 0}
+
+    elif categories == 'B':
+        names_of_B = input("Enter your name here: ")
+        categories_B = "Team player of the Year"
+        Team_player_of_the_Year[names_of_B] = {'category': categories_B, 'votes': 0}
+
+    elif categories == 'C':
+        names_of_C = input("Enter your name here: ")
+        categories_C = "Innovation award"
+        Innovation_award[names_of_C] = {'category': categories_C, 'votes': 0}
+
+    else:
+        print("We don't have this category")
+
+                                 #LOGIC (2)
+
+voters = int(input("Enter voters frequency: "))
+
+for vote in range(voters):
+    voting_for_A = input(f"{Employees_of_the_Year.keys()} Name the employee from the given names whom you want to vote: ")
+    
+    if voting_for_A in Employees_of_the_Year:
+        Employees_of_the_Year[voting_for_A]['votes'] += 1
+        vote_recorded = True
+    else:
+        print("Invalid vote. Please choose a valid employee.")
+
+    voting_for_B = input(f"{Team_player_of_the_Year.keys()} Name the employee from the given names whom you want to vote: ")
+
+    if voting_for_B in Team_player_of_the_Year:
+        Team_player_of_the_Year[voting_for_B]['votes'] += 1
+        vote_recorded = True
+    else:
+        print("Invalid vote. Please choose a valid employee.")
+
+    voting_for_C = input(f"{Innovation_award.keys()} Name the employee from the given names whom you want to vote: ")
+
+    if voting_for_C in Innovation_award:
+        Innovation_award[voting_for_C]['votes'] += 1
+        vote_recorded = True
+    else:
+        print("Invalid vote. Please choose a valid employee.")
+
+if vote_recorded:
+    print("All VOTES HAS BEEN RECORDED")
+
+                                    #LOGIC (3)
+
+employee_award = -1
+name_employee = None
+player_award = -1
+name_player = None
+innovation_award = -1
+name_innovation = None
+
+print("Final vote counts for 'Employees of the Year':")
+for employee, award in Employees_of_the_Year.items():
+    print(f"{employee}: {award['votes']} votes")
+    votes_count_A = award['votes']
+    if votes_count_A > employee_award:
+        employee_award = votes_count_A
+        name_employee = employee
+
+print("Final vote counts for 'Team of the year':")
+for player, Award in Team_player_of_the_Year.items():
+    print(f"{player}: {Award['votes']} votes")
+    votes_count_B = Award['votes']
+    if votes_count_B > player_award:
+        player_award = votes_count_B
+        name_player = player
+
+print("Final vote counts for 'Innovation award':")
+for innovation, AwArd in Innovation_award.items():
+    print(f"{innovation}: {AwArd['votes']} votes")
+    votes_count_C = AwArd['votes']
+    if votes_count_C > innovation_award:
+        innovation_award = votes_count_C
+        name_innovation = innovation
+
+if name_employee and name_player and name_innovation is not None:
+ print(f"{name_employee} is the Winner of 'Employees of the Year AWARD' they got {employee_award} votes")
+ print(f"{name_player} is the Winner of 'Employees of the Year AWARD' they got {player_award} votes")
+ print(f"{name_innovation} is the Winner of 'Employees of the Year AWARD' they got {innovation_award} votes")
+else:
+    print("\nNo votes recorded.")
